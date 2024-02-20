@@ -27,9 +27,20 @@ int main() {
 ****************************************************************************************/
 
 void tester_tableau1d(void) {
+    double tableau1[] = {1, 2, 3, 4, 5};
+    double tableau2[] = {1, 2, 3, 4, 5};
+    double tableau3[] = {1, 2, 3, 4, 5};
+    double tableau4[] = {1, 2, 3, 4, 5};
+    double tableau5[] = {1, 2, 3, 4, 5};
+
     printf("*********************************************************\n");
     printf("*                     TEST TABLEAU1D                    *\n");
     printf("*********************************************************\n");
+
+
+    printf("FONCTION AFFICHER_TABLEAU1D : \n");
+    printf("T1: ");
+    afficher_tableau1d(tableau1, 5);
 }
 
 void tester_tableau2d(void) {
