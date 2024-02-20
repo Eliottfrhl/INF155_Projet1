@@ -32,16 +32,21 @@ void afficher_tableau1d(double *tableau, int taille){
 
 }
 /*
-NOM DE LA FONCTION :
+NOM DE LA FONCTION : somme_tableau1d
 
 DESCRIPTION
 
-PARAMÈTRES :
+PARAMÈTRES : - tableau : Un tableau à une dimension à analyser.
+             - taille : taille du tableau
 
 VALEUR DE RETOUR :
 */
 double somme_tableau1d(double *tableau, int taille){
-
+    double somme = 0;
+    for (int i = 0; i < taille; i++) {
+        somme += tableau[i];
+    }
+    return somme;
 }
 
 double produit_tableau1d(double *tableau, int taille,double facteur){
