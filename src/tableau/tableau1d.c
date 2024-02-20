@@ -2,6 +2,11 @@
     TABLEAU_1D
 
 *****************************************************************************************/
+#include "tableau1d.h"
+
+#include <stdio.h>
+#include <stdlib.h>
+
 
 
 /****************************************************************************************
@@ -20,16 +25,17 @@
 *                           DEFINTION DES FONCTIONS PUBLIQUES                            *
 ****************************************************************************************/
 /*
-NOM DE LA FONCTION : afficher tableau
+NOM DE LA FONCTION : afficher_tableau1d
 
-DESCRIPTION
+DESCRIPTION: affiche le tableau 1d
 
-PARAMÈTRES :
+PARAMÈTRES : - tableau : Un tableau à une dimension à analyser.
+             - taille : taille du tableau
 
 VALEUR DE RETOUR :
 */
 void afficher_tableau1d(double *tableau, int taille){
-
+    printf("%0.3lf %0.3lf %0.3lf %0.3lf %0.3lf\n",tableau[0],tableau[1],tableau[2],tableau[3],tableau[4]);
 }
 /*
 NOM DE LA FONCTION : somme_tableau1d
