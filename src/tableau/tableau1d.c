@@ -20,7 +20,7 @@
 *                           DEFINTION DES FONCTIONS PUBLIQUES                            *
 ****************************************************************************************/
 /*
-NOM DE LA FONCTION :
+NOM DE LA FONCTION : afficher tableau
 
 DESCRIPTION
 
