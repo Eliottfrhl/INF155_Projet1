@@ -39,7 +39,7 @@ void tester_tableau1d(void) {
     printf("*********************************************************\n");
 
 
-    printf("FONCTION AFFICHER_TABLEAU1D : ");
+    printf("\nFONCTION AFFICHER_TABLEAU1D : ");
     printf("\nT1 : ");
     afficher_tableau1d(tableau1, 5);
     printf("\nT2 : ");
@@ -47,31 +47,28 @@ void tester_tableau1d(void) {
     printf("\nT3 : ");
     afficher_tableau1d(tableau5, 3);
 
-    printf("\nFONCTION SOMME : ");
+    printf("\n\nFONCTION SOMME : ");
     printf("\nT1 : %0.3lf", somme_tableau1d(tableau1, 5));
     printf("\nT2 : %0.3lf", somme_tableau1d(tableau2, 5));
     printf("\nT3 : %0.3lf", somme_tableau1d(tableau2, 0));
 
+    printf("\n\nFONCTION PRODUIT : ");
+    printf("\nT1 : ");
     produit_tableau1d(tableau1, 5, 5);
+    printf("\nT2 : ");
     produit_tableau1d(tableau2, 5,0.1);
+    printf("\nT3 : ");
     produit_tableau1d(tableau3, 3, 0);
 
-    printf("\nFONCTION PRODUIT : ");
-    printf("\nT1 : ");
-    afficher_tableau1d(tableau1, 5);
-    printf("\nT2 : ");
-    afficher_tableau1d(tableau2, 5);
-    printf("\nT3 : ");
-    afficher_tableau1d(tableau3, 3);
 
-    printf("\nFONCTION PRODUIT SCALAIRE : ");
+    printf("\n\nFONCTION PRODUIT SCALAIRE : ");
     printf("\nT1 : %0.3lf", produit_scalaire1D(tableau4, tableau5, 5));
     printf("\nT2 : %0.3lf", produit_scalaire1D(tableau4, tableau6, 5));
 
     double* tableau_cree1 = creer_tableau1d(5);
     double* tableau_cree2 = creer_tableau1d(3);
 
-    printf("\nFONCTION CREER TABLEAU : ");
+    printf("\n\nFONCTION CREER TABLEAU : ");
     printf("\nT1 : ");
     afficher_tableau1d(tableau_cree1, 5);
     printf("\nT2 : ");
