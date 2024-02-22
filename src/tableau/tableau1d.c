@@ -40,13 +40,6 @@ void afficher_tableau1d(double *tableau, int taille){
 
 }
 
-
-
-
-
-
-
-
 /*
 NOM DE LA FONCTION : somme_tableau1d
 
@@ -65,33 +58,58 @@ double somme_tableau1d(double *tableau, int taille){
     return somme;
 }
 
-
 /*
 NOM DE LA FONCTION : produit_tableau1d
 
-DESCRIPTION: L'objectif de cette fonction est de faire le produit
+DESCRIPTION: L'objectif de cette fonction est de multiplier la valeur de chaque case du tableau par la valeur recu.
+
+PARAMÈTRES : - tableau : Un tableau à une dimension à analyser.
+             - taille : taille du tableau
+             - valeur : la valeur utiliser pour la multiplication
+
+
+VALEUR DE RETOUR : aucune
+*/
+
+double produit_tableau1d(double *tableau, int taille,double valeur){
+        for (int i = 0; i < taille; i++) {
+        tableau[i]= valeur*tableau[i];
+        //printf("%0.3lf ",tableau[i]);
+    }
+    afficher_tableau1d(tableau,taille);
+    return 0;
+}
+/*
+NOM DE LA FONCTION :
+
+DESCRIPTION
 
 PARAMÈTRES :
 
 VALEUR DE RETOUR :
 */
 
-double produit_tableau1d(double *tableau, int taille,double valeur){
-        for (int i = 0; i < taille; i++) {
-        tableau[i]= valeur*tableau[i];
-        printf("%0.3lf ",tableau[i]);
-    }
+double produit_scalaire1D(double *tableau1, double *tableau2, int taille){
+
     return 0;
 }
 
+/*
+NOM DE LA FONCTION : creer_tableau1d
 
+DESCRIPTION: La fonction a pour but de creer un tableau d'une taille demander dont tout les valeurs sont nuls
 
-double produit_scalaire1D(double *tableau1, double *tableau2, int taille){
+PARAMÈTRES : - taille: taille du tableau
 
-}
-
+VALEUR DE RETOUR :
+*/
 double* creer_tableau1d(int taille){
 
+    double * tableau_cree[taille];
+    for (int i = 0; i < taille; i++) {
+        tableau_cree[i]= 0;
+    }
+    return tableau_cree[taille];
 }
 /*
 NOM DE LA FONCTION :
