@@ -97,7 +97,7 @@ double produit_scalaire1D(double *tableau1, double *tableau2, int taille){
 /*
 NOM DE LA FONCTION : creer_tableau1d
 
-DESCRIPTION: La fonction a pour but de creer un tableau d'une taille demander dont tout les valeurs sont nuls
+DESCRIPTION: La fonction a pour but de creer un tableau d'une taille demandée dont tout les valeurs sont nuls
 
 PARAMÈTRES : - taille: taille du tableau
 
@@ -112,16 +112,19 @@ double* creer_tableau1d(int taille){
     return tableau_cree[taille];
 }
 /*
-NOM DE LA FONCTION :
+NOM DE LA FONCTION : detruire_tableau1d
 
-DESCRIPTION
+DESCRIPTION : La fonction a pour but de libérer la mémoire allouée pour le tableau
+
 
 PARAMÈTRES :
+    - tableau : l'adresse du tableau à une dimension à analyser.
 
 VALEUR DE RETOUR :
 */
 void detruire_tableau1d(double **tableau){
-
+    free(*tableau);
+    *tableau = NULL;
 }
 /****************************************************************************************
 *                           DEFINTION DES FONCTIONS PRIVEES                            *
