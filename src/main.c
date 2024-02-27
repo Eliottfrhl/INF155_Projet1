@@ -75,13 +75,13 @@ void tester_tableau1d(void) {
     double* tableau_cree2 = creer_tableau1d(3);
     afficher_tableau1d(tableau_cree2,3);
 
-/*
+
     detruire_tableau1d(&tableau_cree1);
     detruire_tableau1d(&tableau_cree2);
     printf("\nFONCTION DETRUIRE TABLEAU : ");
     printf("\nT1 : %p", tableau_cree1);
     printf("\nT1 : %p", tableau_cree2);
-*/
+
 }
 
 void tester_tableau2d(void) {
