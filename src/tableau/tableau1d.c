@@ -36,8 +36,9 @@ VALEUR DE RETOUR : aucune
 */
 
 void afficher_tableau1d(double *tableau, int taille){
-    printf("%0.3lf %0.3lf %0.3lf %0.3lf %0.3lf",tableau[0],tableau[1],tableau[2],tableau[3],tableau[4]);
-
+    for (int i = 0; i < taille; i++) {
+        printf("%0.3lf ",tableau[i]);
+    }
 }
 
 /*
@@ -90,8 +91,11 @@ VALEUR DE RETOUR :
 */
 
 double produit_scalaire1D(double *tableau1, double *tableau2, int taille){
-
-    return 0;
+    double produit_scalaire = 0;
+    for (int i = 0; i < taille; i++) {
+        produit_scalaire += tableau1[i]*tableau2[i];
+    }
+    return produit_scalaire;
 }
 
 /*
@@ -104,12 +108,18 @@ PARAMÈTRES : - taille: taille du tableau
 VALEUR DE RETOUR :
 */
 double* creer_tableau1d(int taille){
-
+    double* tableau = (double*)calloc(taille, sizeof(double));
+    for (int i = 0; i < taille; i++) {
+        tableau[i]= 0;
+    }
+    return tableau;
+    /*
     double * tableau_cree[taille];
     for (int i = 0; i < taille; i++) {
         tableau_cree[i]= 0;
     }
     return tableau_cree[taille];
+     */
 }
 /*
 NOM DE LA FONCTION : detruire_tableau1d
@@ -124,7 +134,8 @@ VALEUR DE RETOUR :
 */
 void detruire_tableau1d(double **tableau){
     free(*tableau);
-    *tableau = NULL;
+    // Mettre l'adresse du tableau à 0
+    *tableau = 0;
 }
 /****************************************************************************************
 *                           DEFINTION DES FONCTIONS PRIVEES                            *

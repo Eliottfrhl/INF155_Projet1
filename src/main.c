@@ -80,7 +80,7 @@ void tester_tableau1d(void) {
     detruire_tableau1d(&tableau_cree2);
     printf("\nFONCTION DETRUIRE TABLEAU : ");
     printf("\nT1 : %p", tableau_cree1);
-    printf("\nT1 : %p", tableau_cree2);
+    printf("\nT1 : %p\n\n", tableau_cree2);
 
 }
 
