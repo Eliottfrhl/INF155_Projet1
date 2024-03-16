@@ -1,5 +1,8 @@
 #include "tableau/tableau1d.h"
 #include "tableau/tableau2d.h"
+#include "image/bitmap.h"
+#include "image/image_gris.h"
+#include "image/noyau_filtre.h"
 #include <stdio.h>
 
 /****************************************************************************************
@@ -208,10 +211,73 @@ void tester_noyau(void) {
     printf("*********************************************************\n");
     printf("*                     TEST NOYAU                        *\n");
     printf("*********************************************************\n");
+
+    printf("\nPASSE HAUT : \n");
+    double **passe_haut = filtre_passe_haut();
+    afficher_tableau2d(passe_haut, 3, 3);
+
+    printf("\nPASSE BAS : \n");
+    double **passe_bas = filtre_passe_bas();
+    afficher_tableau2d(passe_bas, 3, 3);
+
+    printf("\nMOYEN : \n");
+    double **moyenneur = filtre_moyenneur();
+    afficher_tableau2d(moyenneur, 3, 3);
+
+    printf("\nLAPLACIEN : \n");
+    double **laplacien = filtre_laplacien();
+    afficher_tableau2d(laplacien, 3, 3);
+
+    detruire_filtre(&passe_haut);
+    detruire_filtre(&passe_bas);
+    detruire_filtre(&moyenneur);
+    detruire_filtre(&laplacien);
 }
 
 void tester_image_gris(void) {
     printf("*********************************************************\n");
     printf("*                     TEST IMAGE GRIS                   *\n");
     printf("*********************************************************\n");
+
+    // Charger l'image contenue dans le fichier "plaque_test_1.bmp"
+    void *image;
+    int nb_lignes;
+    int nb_colonnes;
+    int a_ete_charger = lire("plaque_test_1.bmp", &image, &nb_lignes, &nb_colonnes);
+    if (a_ete_charger) {
+        printf("\nL'IMAGE A ETE CHARGE AVEC SUCCES\n");
+    } else {
+        printf("\nL'IMAGE N'A PAS ETE CHARGE\n");
+    }
+    //Chargez le filtre passe bas.
+    double **passe_bas = filtre_passe_bas();
+    //Filtrez l'image.
+    void *image_filtree;
+    filtrer(image, nb_lignes, nb_colonnes, passe_bas);
+
+    //Enregistrez sous
+    //resultat_passe_bas1.bmp
+    ecrire("resultat_passe_bas1.bmp", image, nb_lignes, nb_colonnes);
+    //Chargez plaque_test_2.bmp
+    //Chargez le filtre passe haut.
+    //Filtrez l'image.
+    //Enregistrez sous
+    //resultat_passe_haut2.bmp
+
+
+    //Test3 Test4
+    //Chargez plaque_test_1.bmp
+    //Chargez le filtre laplacien.
+    //Seuillez avec un seuil de 0.5
+    //Filtrez l'image.
+    //Faite le négatif de cette image.
+    //Enregistrez sous
+    //resultat_laplacien1.bmp
+    //Chargez plaque_test_2.bmp
+    //Chargez le filtre laplacien.
+    //Seuillez avec un seuil de 0.25
+    //Filtrez l'image.
+    //Enregistrez sous
+    //resultat_laplacien2.bmp
+
 }

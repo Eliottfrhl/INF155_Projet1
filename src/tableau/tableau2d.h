@@ -14,7 +14,6 @@
 ****************************************************************************************/
 
 double** creer_tableau2d(int nb_lignes, int nb_colonnes);
-void statique_a_dynamique(double **tableau_statique, double **tableau_dynamique, int nb_lignes, int nb_colonnes);
 void detruire_tableau2d(double ***tableau, int nb_lignes);
 void afficher_tableau2d(double **tableau, int nb_lignes, int nb_colonnes);
 void initialiser_tableau2d(double **tableau, int nb_lignes, int nb_colonnes, double valeur);
