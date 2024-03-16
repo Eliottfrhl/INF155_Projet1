@@ -1,3 +1,14 @@
+/****************************************************************************************
+    NOYAU_FILTRE.C
+
+    Auteur  : Liam Dery / Eliott Frohly
+    Date    : 16 mars 2024
+
+    Ce module contient des sous-programmes qui ???????????????????????????????.
+
+
+ *****************************************************************************************/
+
 #include "noyau_filtre.h"
 #include "../tableau/tableau2d.h"
 
@@ -38,7 +49,6 @@ double** filtre_passe_haut()
     return filtre;
 }
 
-//
 double** filtre_passe_bas(){
     double** filtre;
     filtre = creer_tableau2d(3,3);

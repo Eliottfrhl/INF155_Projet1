@@ -30,11 +30,63 @@
 /****************************************************************************************
 *                       DÉCLARATION DES FONCTIONS PUBLIQUES                             *
 ****************************************************************************************/
+/*
+NOM DE LA FONCTION : filtre_passe_haut
 
+DESCRIPTION :
+
+PARAMÈTRES :
+
+VALEUR DE RETOUR :
+    - filtre:
+*/
 double** filtre_passe_haut();
+
+/*
+NOM DE LA FONCTION : filtre_passe_bas
+
+DESCRIPTION :
+
+PARAMÈTRES :
+
+VALEUR DE RETOUR :
+    - filtre:
+*/
 double** filtre_passe_bas();
+
+/*
+NOM DE LA FONCTION : filtre_moyenneur
+
+DESCRIPTION :
+
+PARAMÈTRES :
+
+VALEUR DE RETOUR :
+    - filtre:
+*/
 double** filtre_moyenneur();
+
+/*
+NOM DE LA FONCTION : filtre_laplacien
+
+DESCRIPTION :
+
+PARAMÈTRES :
+
+VALEUR DE RETOUR :
+    - filtre:
+*/
 double** filtre_laplacien();
+/*
+NOM DE LA FONCTION : detruire_filtre
+
+DESCRIPTION :
+
+PARAMÈTRES :
+    - filtre:
+
+VALEUR DE RETOUR : aucune
+*/
 void detruire_filtre(double ***filtre);
 
 #endif //PROJET1_LIBRAIREIMAGE_NOYAU_FILTRE_H
