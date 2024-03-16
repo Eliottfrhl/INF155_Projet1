@@ -1,6 +1,22 @@
-//
-// Created by frohl on 16/03/2024.
-//
+
+
+/****************************************************************************************
+    NOYAU_FILTRE.H
+
+    Auteur  : Liam Dery / Eliott Frohly
+    Date    : 16 mars 2024
+
+    Ce module contient des sous-programmes qui permetent de manipuler  des tableaux 2D.
+
+    Liste des sous-programmes :
+    - filtre_passe_haut :
+    - filtre_passe_bas :
+    - filtre_moyenneur :
+    - filtre_laplacien :
+    - detruire_filtre :
+
+ *****************************************************************************************/
+
 
 #ifndef PROJET1_LIBRAIREIMAGE_NOYAU_FILTRE_H
 #define PROJET1_LIBRAIREIMAGE_NOYAU_FILTRE_H
