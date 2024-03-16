@@ -95,8 +95,8 @@ void tester_tableau1d(void) {
 
 
     printf("\n\nFONCTION PRODUIT SCALAIRE : ");
-    printf("\nT1 : %0.3lf", produit_scalaire1D(tableau4, tableau5, 5));
-    printf("\nT2 : %0.3lf", produit_scalaire1D(tableau4, tableau6, 5));
+    printf("\nT1 : %0.3lf", produit_scalaire1d(tableau4, tableau5, 5));
+    printf("\nT2 : %0.3lf", produit_scalaire1d(tableau4, tableau6, 5));
 
 
 
