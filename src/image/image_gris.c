@@ -1,3 +1,15 @@
+/****************************************************************************************
+    IMAGE_GRIS.C
+
+    Auteur  : Liam Dery / Eliott Frohly
+    Date    : 16 mars 2024
+
+    Ce module contient des sous-programmes qui permetent de ??????????????????.
+
+
+ *****************************************************************************************/
+
+
 #include <stdlib.h>
 #include "image_gris.h"
 #include "noyau_filtre.h"
