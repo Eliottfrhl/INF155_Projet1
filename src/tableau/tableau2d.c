@@ -141,8 +141,10 @@ double somme_tableau2d(double **tableau, int nb_lignes, int nb_colonnes){
  * VALEUR DE RETOUR : aucune
  */
 void produit_par_scalaire2d(double **tableau, int nb_lignes, int nb_colonnes, double facteur){
+    // On parcourt le tableau
     for (int i = 0; i < nb_lignes; i++) {
         for (int j = 0; j < nb_colonnes; j++) {
+            // On multiplie l'élément courant par le facteur
             tableau[i][j] *= facteur;
         }
     }
@@ -162,8 +164,10 @@ void produit_par_scalaire2d(double **tableau, int nb_lignes, int nb_colonnes, do
  * VALEUR DE RETOUR : aucune
  */
 void puissance_tableau2d(double **tableau, int nb_lignes, int nb_colonnes, double puissance){
+    // On parcourt le tableau
     for (int i = 0; i < nb_lignes; i++) {
         for (int j = 0; j < nb_colonnes; j++) {
+            // On élève l'élément courant à la puissance
             tableau[i][j] = pow(tableau[i][j], puissance);
         }
     }
@@ -184,9 +188,11 @@ void puissance_tableau2d(double **tableau, int nb_lignes, int nb_colonnes, doubl
  * VALEUR DE RETOUR : aucune
  */
 void produit_tableau2d(double **tableau1, double **tableau2, int nb_lignes, int nb_colonnes, double ***tableau_produit){
+    // On crée le tableau produit
     *tableau_produit = creer_tableau2d(nb_lignes, nb_colonnes);
     for (int i = 0; i < nb_lignes; i++) {
         for (int j = 0; j < nb_colonnes; j++) {
+            // On multiplie les éléments correspondants des deux tableaux
             (*tableau_produit)[i][j] = tableau1[i][j] * tableau2[i][j];
         }
     }

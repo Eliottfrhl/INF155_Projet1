@@ -38,6 +38,7 @@
     tab[1][1] = 1.0,  \
     tab[2][0] = 0.33,  \
     tab[2][1] = 0.66
+
 /****************************************************************************************
 *                           DECLARATION DES FONCTIONS PRIVEES                           *
 ****************************************************************************************/
@@ -114,7 +115,6 @@ void tester_tableau1d(void) {
     printf("\n\nFONCTION DETRUIRE TABLEAU : ");
     printf("\nT1 : %p", tableau_cree1);
     printf("\nT1 : %p\n\n", tableau_cree2);
-
 }
 
 void tester_tableau2d(void) {
@@ -224,7 +224,7 @@ void tester_noyau(void) {
     double **moyenneur = filtre_moyenneur();
     afficher_tableau2d(moyenneur, 3, 3);
 
-    printf("\nLAPLACIEN : \n\n");
+    printf("\nLAPLACIEN : \n");
     double **laplacien = filtre_laplacien();
     afficher_tableau2d(laplacien, 3, 3);
 
@@ -235,7 +235,7 @@ void tester_noyau(void) {
 }
 
 void tester_image_gris(void) {
-    printf("*********************************************************\n");
+    printf("\n*********************************************************\n");
     printf("*                     TEST IMAGE GRIS                   *\n");
     printf("*********************************************************\n");
 
@@ -246,18 +246,23 @@ void tester_image_gris(void) {
     int a_ete_charger = lire("../data/plaque_test_1.bmp", &image, &nb_lignes, &nb_colonnes);
     if (a_ete_charger) {
         printf("\nL'IMAGE A ETE CHARGE AVEC SUCCES\n");
+        printf("\nNB LIGNES : %d", nb_lignes);
+        printf("\nNB COLONNES : %d\n", nb_colonnes);
     } else {
         printf("\nL'IMAGE N'A PAS ETE CHARGE\n");
     }
     //Chargez le filtre passe bas.
     double **passe_bas = filtre_passe_bas();
+    printf("Filtre cree\n");
+    afficher_tableau2d(passe_bas, 3, 3);
     //Filtrez l'image.
     filtrer(image, nb_lignes, nb_colonnes, passe_bas);
-    //Detruire l'image
-    detruire(image, nb_lignes, nb_colonnes);
+    printf("Image filtree\n");
     //Enregistrez sous
     //resultat_passe_bas1.bmp
     ecrire("../output/resultat_passe_bas1.bmp", image, nb_lignes, nb_colonnes);
+    //Detruire l'image
+    detruire(image, nb_lignes, nb_colonnes);
     //Chargez plaque_test_2.bmp
     void *image2;
     int nb_lignes2;

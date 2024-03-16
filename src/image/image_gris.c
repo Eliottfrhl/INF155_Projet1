@@ -11,6 +11,8 @@
 *                           DÉCLARATION DES FONCTIONS PRIVÉES                           *
 ****************************************************************************************/
 
+void filtrer_pixel(double **image, int nb_lignes, int nb_colonnes, double **filtre, int i, int j, double **nouvelle_image);
+
 /****************************************************************************************
 *                           DÉFINTION DES FONCTIONS PUBLIQUES                            *
 ****************************************************************************************/
@@ -114,19 +116,7 @@ void filtrer(double ***image, int nb_lignes, int nb_colonnes, double **filtre)
     {
         for(int j = 0; j < nb_colonnes; j++)
         {
-            nouvelle_image[i][j] = 0;
-            for(int k = 0; k < 3; k++)
-            {
-                for(int l = 0; l < 3; l++)
-                {
-                    int ligne = i + k - 1;
-                    int colonne = j + l - 1;
-                    if(ligne >= 0 && ligne < nb_lignes && colonne >= 0 && colonne < nb_colonnes)
-                    {
-                        nouvelle_image[i][j] += (*image)[ligne][colonne] * filtre[k][l];
-                    }
-                }
-            }
+            filtrer_pixel(*image, nb_lignes, nb_colonnes, filtre, i, j, nouvelle_image);
         }
     }
     detruire_tableau2d(image, nb_lignes);
@@ -136,3 +126,25 @@ void filtrer(double ***image, int nb_lignes, int nb_colonnes, double **filtre)
 /****************************************************************************************
 *                           DÉFINTION DES FONCTIONS PRIVÉES                             *
 ****************************************************************************************/
+
+//Faites une fonction privée qui permet de calculer la valeur filtrée d’un pixel. Pour filtrer
+//un pixel, on se doit de calculer la convolution de ce pixel avec le filtre reçu.
+//Requis 16 : Lorsque l'on applique un filtre à un pixel, on vient centrer le filtre sur le pixel ciblé. Ce
+//qui veut dire qu'une portion du filtre est sur les voisins du pixel ciblé. La convolution
+//est simplement l'accumulation des produits entre le filtre et l'image. Le résultat de cette
+//accumulation remplace le pixel dans l'image traitée.
+void filtrer_pixel(double **image, int nb_lignes, int nb_colonnes, double **filtre, int i, int j, double **nouvelle_image)
+{
+    for(int k = 0; k < 3; k++)
+    {
+        for(int l = 0; l < 3; l++)
+        {
+            int ligne = i + k - 1;
+            int colonne = j + l - 1;
+            if(ligne >= 0 && ligne < nb_lignes && colonne >= 0 && colonne < nb_colonnes)
+            {
+                nouvelle_image[i][j] += image[ligne][colonne] * filtre[k][l];
+            }
+        }
+    }
+}

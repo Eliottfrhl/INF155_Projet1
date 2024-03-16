@@ -13,7 +13,7 @@ typedef struct {
     int rows; // Nombre de lignes du noyau
     int cols; // Nombre de colonnes du noyau
     double **data; // Tableau 2D dynamique contenant des nombres réels
-} t_filtre;
+} t_image_gris;
 
 /****************************************************************************************
 *                           DÉCLARATION DES FONCTIONS PRIVÉES                           *

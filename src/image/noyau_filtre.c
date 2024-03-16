@@ -5,6 +5,10 @@
 *                               DÉFINTION DES CONSTANTES                                *
 ****************************************************************************************/
 
+struct t_filtre {
+    double **coefficients; // Tableau 2D dynamique contenant des nombres réels
+};
+
 /****************************************************************************************
 *                           DÉCLARATION DES FONCTIONS PRIVÉES                           *
 ****************************************************************************************/
@@ -22,20 +26,9 @@
 //1 4 1
 //1 1 1
 
-double** filtre_passe_haut()
+t_filtre filtre_passe_haut()
 {
-    double** filtre;
-    filtre = creer_tableau2d(3,3);
-    filtre[0][0] = 1;
-    filtre[0][1] = 1;
-    filtre[0][2] = 1;
-    filtre[1][0] = 1;
-    filtre[1][1] = 4;
-    filtre[1][2] = 1;
-    filtre[2][0] = 1;
-    filtre[2][1] = 1;
-    filtre[2][2] = 1;
-    return filtre;
+
 }
 
 //
