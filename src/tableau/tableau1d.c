@@ -1,5 +1,11 @@
 /****************************************************************************************
-    TABLEAU_1D
+    TABLEAU_1D.C
+
+    Auteur  : Liam Dery / Eliott Frohly
+    Date    : 16 mars 2024
+
+    Ce module contient des sous-programmes qui permetent de manipuler des tableaux 1D.
+
 
 *****************************************************************************************/
 #include "tableau1d.h"
@@ -24,16 +30,6 @@
 /****************************************************************************************
 *                           DEFINTION DES FONCTIONS PUBLIQUES                            *
 ****************************************************************************************/
-/*
-NOM DE LA FONCTION : afficher_tableau1d
-
-DESCRIPTION: affiche le tableau 1d
-
-PARAMÈTRES : - tableau : Un tableau à une dimension à analyser.
-             - taille : taille du tableau
-
-VALEUR DE RETOUR : aucune
-*/
 
 void afficher_tableau1d(double *tableau, int taille){
     for (int i = 0; i < taille; i++) {
@@ -41,16 +37,7 @@ void afficher_tableau1d(double *tableau, int taille){
     }
 }
 
-/*
-NOM DE LA FONCTION : somme_tableau1d
 
-DESCRIPTION
-
-PARAMÈTRES : - tableau : Un tableau à une dimension à analyser.
-             - taille : taille du tableau
-
-VALEUR DE RETOUR :
-*/
 double somme_tableau1d(double *tableau, int taille){
     double somme = 0;
     for (int i = 0; i < taille; i++) {
@@ -59,18 +46,6 @@ double somme_tableau1d(double *tableau, int taille){
     return somme;
 }
 
-/*
-NOM DE LA FONCTION : produit_tableau1d
-
-DESCRIPTION: L'objectif de cette fonction est de multiplier la valeur de chaque case du tableau par la valeur recu.
-
-PARAMÈTRES : - tableau : Un tableau à une dimension à analyser.
-             - taille : taille du tableau
-             - valeur : la valeur utiliser pour la multiplication
-
-
-VALEUR DE RETOUR : aucune
-*/
 
 double produit_tableau1d(double *tableau, int taille,double valeur){
         for (int i = 0; i < taille; i++) {
@@ -80,17 +55,8 @@ double produit_tableau1d(double *tableau, int taille,double valeur){
     afficher_tableau1d(tableau,taille);
     return 0;
 }
-/*
-NOM DE LA FONCTION :
 
-DESCRIPTION
-
-PARAMÈTRES :
-
-VALEUR DE RETOUR :
-*/
-
-double produit_scalaire1D(double *tableau1, double *tableau2, int taille){
+double produit_scalaire1d(double *tableau1, double *tableau2, int taille){
     double produit_scalaire = 0;
     for (int i = 0; i < taille; i++) {
         produit_scalaire += tableau1[i]*tableau2[i];
@@ -105,7 +71,7 @@ DESCRIPTION: La fonction a pour but de creer un tableau d'une taille demandée do
 
 PARAMÈTRES : - taille: taille du tableau
 
-VALEUR DE RETOUR :
+VALEUR DE RETOUR : - tableau: Le tableau creer
 */
 double* creer_tableau1d(int taille){
     double* tableau = (double*)calloc(taille, sizeof(double));
@@ -113,25 +79,9 @@ double* creer_tableau1d(int taille){
         tableau[i]= 0;
     }
     return tableau;
-    /*
-    double * tableau_cree[taille];
-    for (int i = 0; i < taille; i++) {
-        tableau_cree[i]= 0;
-    }
-    return tableau_cree[taille];
-     */
 }
-/*
-NOM DE LA FONCTION : detruire_tableau1d
-
-DESCRIPTION : La fonction a pour but de libérer la mémoire allouée pour le tableau
 
 
-PARAMÈTRES :
-    - tableau : l'adresse du tableau à une dimension à analyser.
-
-VALEUR DE RETOUR :
-*/
 void detruire_tableau1d(double **tableau){
     free(*tableau);
     // Mettre l'adresse du tableau à 0
