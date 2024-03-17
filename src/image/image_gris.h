@@ -17,18 +17,16 @@
 #ifndef PROJET1_LIBRAIREIMAGE_IMAGE_GRIS_H
 #define PROJET1_LIBRAIREIMAGE_IMAGE_GRIS_H
 
+#include "noyau_filtre.h"
+
 /****************************************************************************************
 *                               DÉFINTION DES CONSTANTES                                *
 ****************************************************************************************/
 
-typedef struct {
-    int rows; // Nombre de lignes du noyau
-    int cols; // Nombre de colonnes du noyau
-    double **data; // Tableau 2D dynamique contenant des nombres réels
-} t_image_gris;
+typedef double** t_image_gris;
 
 /****************************************************************************************
-*                           DÉCLARATION DES FONCTIONS PRIVÉES                           *
+*                           DÉCLARATION DES FONCTIONS PUBLIQUES                         *
 ****************************************************************************************/
 /*
 NOM DE LA FONCTION : negatif
@@ -42,7 +40,7 @@ PARAMÈTRES :
 
 VALEUR DE RETOUR : aucune
 */
-void negatif(double **image, int nb_lignes, int nb_colonnes);
+void negatif(t_image_gris image, int nb_lignes, int nb_colonnes);
 
 /*
 NOM DE LA FONCTION : seuiller
@@ -57,7 +55,7 @@ PARAMÈTRES :
 
 VALEUR DE RETOUR : aucune
 */
-void seuiller(double **image, int nb_lignes, int nb_colonnes, double seuil);
+void seuiller(t_image_gris image, int nb_lignes, int nb_colonnes, double seuil);
 
 /*
 NOM DE LA FONCTION : histogramme
@@ -73,7 +71,7 @@ PARAMÈTRES :
 
 VALEUR DE RETOUR : histogramme
 */
-double* histogramme(double **image, int nb_lignes, int nb_colonnes, int nb_categories);
+double* histogramme(t_image_gris image, int nb_lignes, int nb_colonnes, int nb_categories);
 
 /*
 NOM DE LA FONCTION : filtrer
@@ -88,14 +86,7 @@ PARAMÈTRES :
 
 VALEUR DE RETOUR : aucune
 */
-void filtrer(double ***image, int nb_lignes, int nb_colonnes, double **filtre);
+void filtrer(t_image_gris *image, int nb_lignes, int nb_colonnes, t_filtre filtre);
 
-/****************************************************************************************
-*                           DÉFINTION DES FONCTIONS PUBLIQUES                            *
-****************************************************************************************/
-
-/****************************************************************************************
-*                           DÉFINTION DES FONCTIONS PRIVÉES                             *
-****************************************************************************************/
 
 #endif //PROJET1_LIBRAIREIMAGE_IMAGE_GRIS_H

@@ -25,11 +25,7 @@
 *                               DÉFINTION DES CONSTANTES                                *
 ****************************************************************************************/
 
-typedef struct {
-    int rows; // Nombre de lignes du noyau
-    int cols; // Nombre de colonnes du noyau
-    double **data; // Tableau 2D dynamique contenant des nombres réels
-} t_filtre;
+typedef double** t_filtre;
 
 /****************************************************************************************
 *                       DÉCLARATION DES FONCTIONS PUBLIQUES                             *
@@ -44,7 +40,7 @@ PARAMÈTRES :
 VALEUR DE RETOUR :
     - filtre:
 */
-double** filtre_passe_haut();
+t_filtre filtre_passe_haut();
 
 /*
 NOM DE LA FONCTION : filtre_passe_bas
@@ -56,7 +52,7 @@ PARAMÈTRES :
 VALEUR DE RETOUR :
     - filtre:
 */
-double** filtre_passe_bas();
+t_filtre filtre_passe_bas();
 
 /*
 NOM DE LA FONCTION : filtre_moyenneur
@@ -68,7 +64,7 @@ PARAMÈTRES :
 VALEUR DE RETOUR :
     - filtre:
 */
-double** filtre_moyenneur();
+t_filtre filtre_moyenneur();
 
 /*
 NOM DE LA FONCTION : filtre_laplacien
@@ -80,7 +76,7 @@ PARAMÈTRES :
 VALEUR DE RETOUR :
     - filtre:
 */
-double** filtre_laplacien();
+t_filtre filtre_laplacien();
 /*
 NOM DE LA FONCTION : detruire_filtre
 
@@ -91,6 +87,6 @@ PARAMÈTRES :
 
 VALEUR DE RETOUR : aucune
 */
-void detruire_filtre(double ***filtre);
+void detruire_filtre(t_filtre filtre);
 
 #endif //PROJET1_LIBRAIREIMAGE_NOYAU_FILTRE_H

@@ -228,10 +228,10 @@ void tester_noyau(void) {
     double **laplacien = filtre_laplacien();
     afficher_tableau2d(laplacien, 3, 3);
 
-    detruire_filtre(&passe_haut);
-    detruire_filtre(&passe_bas);
-    detruire_filtre(&moyenneur);
-    detruire_filtre(&laplacien);
+    detruire_filtre(passe_haut);
+    detruire_filtre(passe_bas);
+    detruire_filtre(moyenneur);
+    detruire_filtre(laplacien);
 }
 
 void tester_image_gris(void) {

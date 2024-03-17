@@ -19,11 +19,13 @@
 *                               DÉFINTION DES CONSTANTES                                *
 ****************************************************************************************/
 
+#define TAILLE_FILTRE 3
+
 /****************************************************************************************
 *                           DÉCLARATION DES FONCTIONS PRIVÉES                           *
 ****************************************************************************************/
 
-void filtrer_pixel(double **image, int nb_lignes, int nb_colonnes, double **filtre, int i, int j, double **nouvelle_image);
+void filtrer_pixel(t_image_gris image, int nb_lignes, int nb_colonnes, t_filtre filtre, int i, int j, t_image_gris nouvelle_image);
 
 /****************************************************************************************
 *                           DÉFINTION DES FONCTIONS PUBLIQUES                            *
@@ -36,8 +38,7 @@ void filtrer_pixel(double **image, int nb_lignes, int nb_colonnes, double **filt
 //Sortie : Aucune
 //Requis 5 : La fonction remplace tous les pixels de l’image reçue par le négatif de ces pixels. On
 //calcule le négatif d’un pixel avec la formule : 1? ??????_?????.
-void negatif(double **image, int nb_lignes, int nb_colonnes)
-{
+void negatif(t_image_gris image, int nb_lignes, int nb_colonnes){
     for(int i = 0; i < nb_lignes; i++)
     {
         for(int j = 0; j < nb_colonnes; j++)
@@ -46,6 +47,8 @@ void negatif(double **image, int nb_lignes, int nb_colonnes)
         }
     }
 }
+
+
 //Sous-programme : seuiller
 //Entrée : Une image en teinte de gris.
 //Le nombre de ligne de cette image.
@@ -57,8 +60,7 @@ void negatif(double **image, int nb_lignes, int nb_colonnes)
 //noir.
 //Requis 8 : Lorsque la valeur originale du pixel est supérieure ou égale au seuil, il est remplacé
 //par un pixel blanc.
-void seuiller(double **image, int nb_lignes, int nb_colonnes, double seuil)
-{
+void seuiller(t_image_gris image, int nb_lignes, int nb_colonnes, double seuil){
     for(int i = 0; i < nb_lignes; i++)
     {
         for(int j = 0; j < nb_colonnes; j++)
@@ -75,7 +77,6 @@ void seuiller(double **image, int nb_lignes, int nb_colonnes, double seuil)
     }
 }
 
-
 //Sous-programme : histogramme
 //Entrée : Une image en teinte de gris.
 //Le nombre de ligne de cette image.
@@ -86,9 +87,8 @@ void seuiller(double **image, int nb_lignes, int nb_colonnes, double seuil)
 //Requis 10 : Créez un tableau dynamique en 1d possédant le bon nombre de case. Ce nombre de
 //case est équivalent au nombre de catégorie.
 //Requis 11 : On détermine la catégorie de chaque pixel et on en fait le décompte.
-double* histogramme(double **image, int nb_lignes, int nb_colonnes, int nb_categories)
-{
-    double* histogramme = (double*)malloc(nb_categories * sizeof(double));
+double* histogramme(t_image_gris image, int nb_lignes, int nb_colonnes, int nb_categories){
+    double *histogramme = (double*)malloc(nb_categories * sizeof(double));
     for(int i = 0; i < nb_categories; i++)
     {
         histogramme[i] = 0;
@@ -121,18 +121,7 @@ double* histogramme(double **image, int nb_lignes, int nb_colonnes, int nb_categ
 //qui veut dire qu'une portion du filtre est sur les voisins du pixel ciblé. La convolution
 //est simplement l'accumulation des produits entre le filtre et l'image. Le résultat de cette
 //accumulation remplace le pixel dans l'image traitée.
-void filtrer(double ***image, int nb_lignes, int nb_colonnes, double **filtre)
-{
-    double** nouvelle_image = creer_tableau2d(nb_lignes, nb_colonnes);
-    for(int i = 0; i < nb_lignes; i++)
-    {
-        for(int j = 0; j < nb_colonnes; j++)
-        {
-            filtrer_pixel(*image, nb_lignes, nb_colonnes, filtre, i, j, nouvelle_image);
-        }
-    }
-    detruire_tableau2d(image, nb_lignes);
-    *image = nouvelle_image;
+void filtrer(t_image_gris *image, int nb_lignes, int nb_colonnes, t_filtre filtre){
 }
 
 /****************************************************************************************
@@ -145,18 +134,20 @@ void filtrer(double ***image, int nb_lignes, int nb_colonnes, double **filtre)
 //qui veut dire qu'une portion du filtre est sur les voisins du pixel ciblé. La convolution
 //est simplement l'accumulation des produits entre le filtre et l'image. Le résultat de cette
 //accumulation remplace le pixel dans l'image traitée.
-void filtrer_pixel(double **image, int nb_lignes, int nb_colonnes, double **filtre, int i, int j, double **nouvelle_image)
-{
-    for(int k = 0; k < 3; k++)
+void filtrer_pixel(t_image_gris image, int nb_lignes, int nb_colonnes, t_filtre filtre, int i, int j, t_image_gris nouvelle_image){
+    int decalage = 1;
+    double somme = 0;
+    for(int k = 0; k < TAILLE_FILTRE; k++)
     {
-        for(int l = 0; l < 3; l++)
+        for(int l = 0; l < TAILLE_FILTRE; l++)
         {
-            int ligne = i + k - 1;
-            int colonne = j + l - 1;
+            int ligne = i - decalage + k;
+            int colonne = j - decalage + l;
             if(ligne >= 0 && ligne < nb_lignes && colonne >= 0 && colonne < nb_colonnes)
             {
-                nouvelle_image[i][j] += image[ligne][colonne] * filtre[k][l];
+                somme += image[ligne][colonne] * filtre[k][l];
             }
         }
     }
+    nouvelle_image[i][j] = somme;
 }
