@@ -26,18 +26,18 @@
 ****************************************************************************************/
 
 
-t_filtre filtre_passe_haut(void){
+t_filtre filtre_passe_haut(){
     t_filtre filtre = creer_tableau2d(3, 3); //On crée un filtre de type t_filtre
     // On remplit le filtre avec les valeurs du filtre passe-haut
-    filtre[0][0] = 1;
-    filtre[0][1] = 1;
-    filtre[0][2] = 1;
-    filtre[1][0] = 1;
-    filtre[1][1] = 4;
-    filtre[1][2] = 1;
-    filtre[2][0] = 1;
-    filtre[2][1] = 1;
-    filtre[2][2] = 1;
+    filtre[0][0] = 0;
+    filtre[0][1] = 0;
+    filtre[0][2] = 0;
+    filtre[1][0] = 0;
+    filtre[1][1] = 1;
+    filtre[1][2] = 0;
+    filtre[2][0] = 0;
+    filtre[2][1] = 0;
+    filtre[2][2] = 0;
     return filtre;
 }
 

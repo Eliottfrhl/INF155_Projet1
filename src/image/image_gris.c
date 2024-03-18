@@ -20,12 +20,29 @@
 *                               DÉFINTION DES CONSTANTES                                *
 ****************************************************************************************/
 
-#define TAILLE_FILTRE 3
+#define TAILLE_FILTRE 3 // La taille des filtres est toujours de 3x3
 
 /****************************************************************************************
 *                           DÉCLARATION DES FONCTIONS PRIVÉES                           *
 ****************************************************************************************/
 
+/*
+NOM DE LA FONCTION : filtrer_pixel
+
+DESCRIPTION :
+    Cette fonction prend une sous-image en niveaux de gris et un filtre en entrée et retourne la valeur du pixel filtré.
+    Pour filtrer un pixel, on se doit de calculer la convolution de ce pixel avec le filtre reçu.
+    Lorsque l'on applique un filtre à un pixel, on vient centrer le filtre sur le pixel ciblé. Ce
+    qui veut dire qu'une portion du filtre est sur les voisins du pixel ciblé. La convolution
+    est simplement l'accumulation des produits entre le filtre et l'image. Le résultat de cette
+    accumulation remplace le pixel dans l'image traitée.
+
+PARAMÈTRES :
+    - sous_image : une sous-image en niveaux de gris
+    - filtre : un filtre
+
+VALEUR DE RETOUR : la valeur du pixel filtré de type double
+*/
 double filtrer_pixel(t_image_gris sous_image, t_filtre filtre);
 
 /****************************************************************************************
