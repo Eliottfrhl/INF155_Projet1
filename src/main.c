@@ -239,95 +239,74 @@ void tester_image_gris(void) {
     printf("*                     TEST IMAGE GRIS                   *\n");
     printf("*********************************************************\n");
 
-    // Charger l'image contenue dans le fichier "plaque_test_1.bmp"
     void *image;
     int nb_lignes;
     int nb_colonnes;
     int a_ete_charger = lire("../data/plaque_test_1.bmp", &image, &nb_lignes, &nb_colonnes);
     if (a_ete_charger) {
         printf("\nL'IMAGE A ETE CHARGE AVEC SUCCES\n");
-        printf("\nNB LIGNES : %d", nb_lignes);
-        printf("\nNB COLONNES : %d\n", nb_colonnes);
+        t_filtre passe_bas = filtre_passe_bas();
+        t_image_gris image_gris = (t_image_gris) image;
+        filtrer(&image_gris, nb_lignes, nb_colonnes, passe_bas);
+        image = (void *) image_gris;
+        ecrire("../output/resultat_passe_bas1.bmp", image, nb_lignes, nb_colonnes);
+        detruire(image, nb_lignes, nb_colonnes);
     } else {
         printf("\nL'IMAGE N'A PAS ETE CHARGE\n");
     }
-    //Chargez le filtre passe bas.
-    double **passe_bas = filtre_passe_bas();
-    printf("Filtre cree\n");
-    afficher_tableau2d(passe_bas, 3, 3);
-    //Filtrez l'image.
-    filtrer(image, nb_lignes, nb_colonnes, passe_bas);
-    //Enregistrez sous
-    //resultat_passe_bas1.bmp
-    ecrire("../output/resultat_passe_bas1.bmp", image, nb_lignes, nb_colonnes);
-    //Detruire l'image
-    detruire(image, nb_lignes, nb_colonnes);
-    //Chargez plaque_test_2.bmp
+
+
     void *image2;
     int nb_lignes2;
     int nb_colonnes2;
     int a_ete_charger2 = lire("../data/plaque_test_2.bmp", &image2, &nb_lignes2, &nb_colonnes2);
     if (a_ete_charger2) {
         printf("\nL'IMAGE A ETE CHARGE AVEC SUCCES\n");
+        t_filtre passe_haut = filtre_passe_haut();
+        afficher_tableau2d(passe_haut, 3, 3);
+        t_image_gris image_gris2 = (t_image_gris) image2;
+        filtrer(&image_gris2, nb_lignes2, nb_colonnes2, passe_haut);
+        image2 = (void *) image_gris2;
+        ecrire("../output/resultat_passe_haut2.bmp", image2, nb_lignes2, nb_colonnes2);
+        detruire(image2, nb_lignes2, nb_colonnes2);
     } else {
         printf("\nL'IMAGE N'A PAS ETE CHARGE\n");
     }
-    //Chargez le filtre passe haut.
-    double **passe_haut = filtre_passe_haut();
-    //Filtrez l'image.
-    filtrer(image2, nb_lignes2, nb_colonnes2, passe_haut);
-    //Enregistrez sous
-    //resultat_passe_haut2.bmp
-    ecrire("../output/resultat_passe_haut2.bmp", image2, nb_lignes2, nb_colonnes2);
-    //Detruire l'image
-    detruire(image2, nb_lignes2, nb_colonnes2);
 
-
-    //Test3 Test4
-    //Chargez plaque_test_1.bmp
     void *image3;
     int nb_lignes3;
     int nb_colonnes3;
     int a_ete_charger3 = lire("../data/plaque_test_1.bmp", &image3, &nb_lignes3, &nb_colonnes3);
     if (a_ete_charger3) {
         printf("\nL'IMAGE A ETE CHARGE AVEC SUCCES\n");
+        t_filtre laplacien = filtre_laplacien();
+        t_image_gris image_gris3 = (t_image_gris) image3;
+        seuiller(image_gris3, nb_lignes3, nb_colonnes3, 0.5);
+        filtrer(&image_gris3, nb_lignes3, nb_colonnes3, laplacien);
+        negatif(image_gris3, nb_lignes3, nb_colonnes3);
+        image3 = (void *) image_gris3;
+        ecrire("../output/resultat_laplacien1.bmp", image3, nb_lignes3, nb_colonnes3);
+        detruire(image3, nb_lignes3, nb_colonnes3);
     } else {
         printf("\nL'IMAGE N'A PAS ETE CHARGE\n");
     }
-    //Chargez le filtre laplacien.
-    double **laplacien = filtre_laplacien();
-    //Seuillez avec un seuil de 0.5
-    seuiller(image3, nb_lignes3, nb_colonnes3, 0.5);
-    //Filtrez l'image.
-    filtrer(image3, nb_lignes3, nb_colonnes3, laplacien);
-    //Faite le négatif de cette image.
-    negatif(image3, nb_lignes3, nb_colonnes3);
-    //Enregistrez sous
-    //resultat_laplacien1.bmp
-    ecrire("../output/resultat_laplacien1.bmp", image3, nb_lignes3, nb_colonnes3);
-    //Detruire l'image
-    detruire(image3, nb_lignes3, nb_colonnes3);
 
-    //Chargez plaque_test_2.bmp
+
     void *image4;
     int nb_lignes4;
     int nb_colonnes4;
     int a_ete_charger4 = lire("../data/plaque_test_2.bmp", &image4, &nb_lignes4, &nb_colonnes4);
     if (a_ete_charger4) {
         printf("\nL'IMAGE A ETE CHARGE AVEC SUCCES\n");
+        t_filtre laplacien2 = filtre_laplacien();
+        t_image_gris image_gris4 = (t_image_gris) image4;
+        seuiller(image_gris4, nb_lignes4, nb_colonnes4, 0.25);
+        filtrer(&image_gris4, nb_lignes4, nb_colonnes4, laplacien2);
+        image4 = (void *) image_gris4;
+        ecrire("../output/resultat_laplacien2.bmp", image4, nb_lignes4, nb_colonnes4);
+        detruire(image4, nb_lignes4, nb_colonnes4);
     } else {
         printf("\nL'IMAGE N'A PAS ETE CHARGE\n");
     }
-    //Chargez le filtre laplacien.
-    double **laplacien2 = filtre_laplacien();
-    //Seuillez avec un seuil de 0.25
-    seuiller(image4, nb_lignes4, nb_colonnes4, 0.25);
-    //Filtrez l'image.
-    filtrer(image4, nb_lignes4, nb_colonnes4, laplacien2);
-    //Enregistrez sous
-    //resultat_laplacien2.bmp
-    ecrire("../output/resultat_laplacien2.bmp", image4, nb_lignes4, nb_colonnes4);
-    //Detruire l'image
-    detruire(image4, nb_lignes4, nb_colonnes4);
-
+    printf("Main fini\n");
 }

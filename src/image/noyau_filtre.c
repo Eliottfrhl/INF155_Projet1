@@ -24,12 +24,11 @@
 /****************************************************************************************
 *                           DÉFINTION DES FONCTIONS PUBLIQUES                            *
 ****************************************************************************************/
-//coefficents passe haute :
-//1 1 1
-//1 4 1
-//1 1 1
+
+
 t_filtre filtre_passe_haut(void){
-    t_filtre filtre = creer_tableau2d(3, 3);
+    t_filtre filtre = creer_tableau2d(3, 3); //On crée un filtre de type t_filtre
+    // On remplit le filtre avec les valeurs du filtre passe-haut
     filtre[0][0] = 1;
     filtre[0][1] = 1;
     filtre[0][2] = 1;
@@ -44,7 +43,8 @@ t_filtre filtre_passe_haut(void){
 
 
 t_filtre filtre_passe_bas(){
-    t_filtre filtre = creer_tableau2d(3, 3);
+    t_filtre filtre = creer_tableau2d(3, 3); //On crée un filtre de type t_filtre
+    // On remplit le filtre avec les valeurs du filtre passe-bas
     filtre[0][0] = 0;
     filtre[0][1] = -1;
     filtre[0][2] = 0;
@@ -57,11 +57,9 @@ t_filtre filtre_passe_bas(){
     return filtre;
 }
 
-// coeff 1/9 1/9 1/9
-//1/9 1/9 1/9
-//1/9 1/9 1/9
 t_filtre filtre_moyenneur(){
-    t_filtre filtre = creer_tableau2d(3, 3);
+    t_filtre filtre = creer_tableau2d(3, 3); //On crée un filtre de type t_filtre
+    // On remplit le filtre avec les valeurs du filtre moyenneur
     filtre[0][0] = 1.0/9;
     filtre[0][1] = 1.0/9;
     filtre[0][2] = 1.0/9;
@@ -74,11 +72,9 @@ t_filtre filtre_moyenneur(){
     return filtre;
 }
 
-//coeff 1 1 1
-//1 -8 1
-//1 1 1
 t_filtre filtre_laplacien(){
-    t_filtre filtre = creer_tableau2d(3, 3);
+    t_filtre filtre = creer_tableau2d(3, 3); //On crée un filtre de type t_filtre
+    // On remplit le filtre avec les valeurs du filtre laplacien
     filtre[0][0] = 1;
     filtre[0][1] = 1;
     filtre[0][2] = 1;
@@ -92,6 +88,7 @@ t_filtre filtre_laplacien(){
 }
 
 void detruire_filtre(t_filtre filtre){
+    // On détruit le filtre avec la fonction detruire_tableau2d du module tableau2d
     detruire_tableau2d(&filtre,3);
 }
 /****************************************************************************************
