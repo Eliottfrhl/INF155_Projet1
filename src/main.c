@@ -1,3 +1,22 @@
+/****************************************************************************************
+    MAIN.C
+
+    Auteur  : Liam Dery / Eliott Frohly
+    Date    : 16 mars 2024
+
+    Ce programme permet de tester les fonctions des librairies tableau1d, tableau2d, noyau_filtre et image_gris et d'en
+    présenter les résultats dans le terminal.
+
+    Liste des sous-programmes :
+    - main : fonction principale du programme
+    - tester_tableau1d : test les fonctions de la librairie tableau1d
+    - tester_tableau2d : test les fonctions de la librairie tableau2d
+    - tester_noyau : test les fonctions de la librairie noyau_filtre
+    - tester_image_gris : test les fonctions de la librairie image_gris
+
+ *****************************************************************************************/
+
+
 #include "tableau/tableau1d.h"
 #include "tableau/tableau2d.h"
 #include "image/bitmap.h"
@@ -8,7 +27,7 @@
 /****************************************************************************************
 *                               DEFINTION DES CONSTANTES                                *
 ****************************************************************************************/
-
+// Initialisation du tableau 2D n°1
 #define INIT_TAB_1(tab)  \
   tab[0][0] = 1,  \
   tab[0][1] = 2,  \
@@ -17,6 +36,7 @@
   tab[2][0] = 7,  \
   tab[2][1] = 8
 
+// Initialisation du tableau 2D n°2
 #define INIT_TAB_2(tab) \
     tab[0][0] = 1.1,  \
     tab[0][1] = 2.1,  \
@@ -31,6 +51,7 @@
     tab[2][2] = 9.1,  \
     tab[2][3] = 0.80
 
+// Initialisation du tableau 2D n°3
 #define INIT_TAB_3(tab) \
     tab[0][0] = 0.25,  \
     tab[0][1] = 0.50,  \
@@ -89,10 +110,13 @@ void tester_tableau1d(void) {
     printf("\n\nFONCTION PRODUIT : ");
     printf("\nT1 : ");
     produit_tableau1d(tableau1, 5, 5);
+    afficher_tableau1d(tableau1, 5);
     printf("\nT2 : ");
     produit_tableau1d(tableau2, 5,0.1);
+    afficher_tableau1d(tableau2, 5);
     printf("\nT3 : ");
     produit_tableau1d(tableau3, 3, 0);
+    afficher_tableau1d(tableau3, 3);
 
 
     printf("\n\nFONCTION PRODUIT SCALAIRE : ");
@@ -297,5 +321,6 @@ void tester_image_gris(void) {
         detruire(image4, nb_lignes4, nb_colonnes4);
         detruire_filtre(laplacien2);
     }
-    printf("Main fini\n");
+    printf("Test fini.\n");
+    printf("Ouvrir le dossier output pour voir les résultats.\n");
 }

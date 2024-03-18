@@ -4,15 +4,13 @@
     Auteur  : Liam Dery / Eliott Frohly
     Date    : 16 mars 2024
 
-    Ce module contient des sous-programmes qui permetent de ??????????????????.
-
+    Ce module contient des sous-programmes qui permettent de manipuler des images en niveaux de gris, leur appliquer
+    des filtres de convolution, de leur appliquer un seuil et d'obtenir des informations.
 
  *****************************************************************************************/
 
 
-#include <stdlib.h>
 #include "image_gris.h"
-#include "noyau_filtre.h"
 #include "../tableau/tableau2d.h"
 #include "../tableau/tableau1d.h"
 
@@ -38,8 +36,8 @@ DESCRIPTION :
     accumulation remplace le pixel dans l'image traitée.
 
 PARAMÈTRES :
-    - sous_image : une sous-image en niveaux de gris
-    - filtre : un filtre
+    - sous_image : une sous-image en niveaux de gris de type t_image_gris
+    - filtre : un filtre de type t_filtre
 
 VALEUR DE RETOUR : la valeur du pixel filtré de type double
 */
@@ -101,35 +99,22 @@ double* histogramme(t_image_gris image, int nb_lignes, int nb_colonnes, int nb_c
     return histogramme;
 }
 
-//Sous-programme : filtrer
-//Entrée : Un pointeur vers une image en teinte de gris.
-//Le nombre de ligne de cette image.
-//Le nombre de colonne de cette image.
-//Un filtre à appliquer sur l’image.
-//Sortie : Aucune
-//Requis 12 : On crée une nouvelle image possédant les mêmes dimensions que l’image original.
-//Requis 13 : On utilise l’image originale pour calculer la valeur de chaque pixel filtré. La valeur des
-//pixels filtrés sont enregistrés dans la nouvelle image.
-//Requis 14 : On détruit l’image originale et on modifie le pointeur de manière à pointée sur la
-//nouvelle image.
-//Requis 15 : Faites une fonction privée qui permet de calculer la valeur filtrée d’un pixel. Pour filtrer
-//un pixel, on se doit de calculer la convolution de ce pixel avec le filtre reçu.
-//Requis 16 : Lorsque l'on applique un filtre à un pixel, on vient centrer le filtre sur le pixel ciblé. Ce
-//qui veut dire qu'une portion du filtre est sur les voisins du pixel ciblé. La convolution
-//est simplement l'accumulation des produits entre le filtre et l'image. Le résultat de cette
-//accumulation remplace le pixel dans l'image traitée.
 void filtrer(t_image_gris *image, int nb_lignes, int nb_colonnes, t_filtre filtre){
-    t_image_gris nouvelle_image = creer_tableau2d(nb_lignes, nb_colonnes);
+    t_image_gris nouvelle_image = creer_tableau2d(nb_lignes, nb_colonnes); //On crée une nouvelle image
+    // On parcourt l'image
     for(int i = 0; i < nb_lignes; i++)
     {
         for(int j = 0; j < nb_colonnes; j++)
         {
-            t_image_gris sous_image;
+            t_image_gris sous_image; //On crée une sous-image
+            // On récupère la sous-image centrée sur le pixel et on lui applique le filtre
             sous_tableau(*image, nb_lignes, nb_colonnes, i, j, TAILLE_FILTRE, TAILLE_FILTRE, &sous_image);
             nouvelle_image[i][j] = filtrer_pixel(sous_image, filtre);
+            // On libère la mémoire allouée pour la sous-image
             detruire_tableau2d(&sous_image, TAILLE_FILTRE);
         }
     }
+    // On libère la mémoire allouée pour l'ancienne image et on remplace l'ancienne image par la nouvelle
     detruire_tableau2d(image, nb_lignes);
     *image = nouvelle_image;
 }
@@ -138,15 +123,12 @@ void filtrer(t_image_gris *image, int nb_lignes, int nb_colonnes, t_filtre filtr
 *                           DÉFINTION DES FONCTIONS PRIVÉES                             *
 ****************************************************************************************/
 
-//Faites une fonction privée qui permet de calculer la valeur filtrée d’un pixel. Pour filtrer
-//un pixel, on se doit de calculer la convolution de ce pixel avec le filtre reçu.
-//Requis 16 : Lorsque l'on applique un filtre à un pixel, on vient centrer le filtre sur le pixel ciblé. Ce
-//qui veut dire qu'une portion du filtre est sur les voisins du pixel ciblé. La convolution
-//est simplement l'accumulation des produits entre le filtre et l'image. Le résultat de cette
-//accumulation remplace le pixel dans l'image traitée. Utilisez les fonctions sous-tableau, somme_tableau2d et produit-tableau2d pour simplifier votre code.
 double filtrer_pixel(t_image_gris sous_image, t_filtre filtre){
-    double **produit = creer_tableau2d(TAILLE_FILTRE, TAILLE_FILTRE);
+    double **produit = creer_tableau2d(TAILLE_FILTRE, TAILLE_FILTRE); //On crée un tableau 2D pour
+                                                                                          // stocker le produit
+    // On calcule le produit entre la sous-image et le filtre
     produit_tableau2d(sous_image, filtre, TAILLE_FILTRE, TAILLE_FILTRE, &produit);
-    double somme = somme_tableau2d(produit, TAILLE_FILTRE, TAILLE_FILTRE);
+    double somme = somme_tableau2d(produit, TAILLE_FILTRE, TAILLE_FILTRE); //On calcule la
+                                                                                                      // somme des éléments du produit
     return somme;
 }

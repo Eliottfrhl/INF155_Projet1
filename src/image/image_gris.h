@@ -4,13 +4,14 @@
     Auteur  : Liam Dery / Eliott Frohly
     Date    : 16 mars 2024
 
-    Ce module contient des sous-programmes qui permetent de ??????????????????.
+    Ce module contient des sous-programmes qui permettent de manipuler des images en niveaux de gris, leur appliquer
+    des filtres de convolution, de leur appliquer un seuil et d'obtenir des informations.
 
     Liste des sous-programmes :
-    - negatif :
-    - seuiller :
-    - histogramme :
-    - filtrer :
+    - negatif : transforme une image en son négatif
+    - seuiller : applique un seuil à une image
+    - histogramme : calcule l'histogramme d'une image
+    - filtrer : applique un filtre donné à une image
 
 
  *****************************************************************************************/
@@ -36,9 +37,9 @@ DESCRIPTION :
  Le négatif d'une image est créé en soustrayant la valeur de chaque pixel de la valeur maximale possible d'un pixel.
 
 PARAMÈTRES :
-    - image :
-    - nb_lignes :
-    - nb_colonnes :
+    - image de type t_image_gris qui est un tableau 2D de double représentant les pixels de l'image
+    - nb_lignes : le nombre de lignes de l'image de type int
+    - nb_colonnes : le nombre de colonnes de l'image de type int
 
 VALEUR DE RETOUR : aucune
 */
@@ -53,10 +54,10 @@ DESCRIPTION :
  du pixel, et tous les pixels ayant une valeur inférieure ou égale au seuil sont fixés à zéro.
 
 PARAMÈTRES :
-    - image :
-    - nb_lignes :
-    - nb_colonnes :
-    - seuil :
+    - image de type t_image_gris qui est un tableau 2D de double représentant les pixels de l'image
+    - nb_lignes : le nombre de lignes de l'image de type int
+    - nb_colonnes : le nombre de colonnes de l'image de type int
+    - seuil : la valeur de seuil de type double
 
 VALEUR DE RETOUR : aucune
 */
@@ -71,10 +72,10 @@ DESCRIPTION :
  de pixels de l'image qui tombent dans la catégorie correspondante.
 
 PARAMÈTRES :
-    - image :
-    - nb_lignes :
-    - nb_colonnes :
-    - nb_categories :
+    - image de type t_image_gris qui est un tableau 2D de double représentant les pixels de l'image
+    - nb_lignes : le nombre de lignes de l'image de type int
+    - nb_colonnes : le nombre de colonnes de l'image de type int
+    - nb_categories : le nombre de catégories pour l'histogramme de type int
 
 
 VALEUR DE RETOUR : histogramme
@@ -91,10 +92,10 @@ DESCRIPTION :
  de filtrage.
 
 PARAMÈTRES :
-    - image :
-    - nb_lignes :
-    - nb_colonnes :
-    - filtre :
+    - image de type t_image_gris qui est un tableau 2D de double représentant les pixels de l'image
+    - nb_lignes : le nombre de lignes de l'image de type int
+    - nb_colonnes : le nombre de colonnes de l'image de type int
+    - filtre : un filtre de type t_filtre à appliquer à l'image
 
 VALEUR DE RETOUR : aucune
 */
