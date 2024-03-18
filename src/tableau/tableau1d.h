@@ -64,7 +64,7 @@ PARAMÈTRES : - tableau : Un tableau à une dimension à analyser.
 VALEUR DE RETOUR : aucune
 */
 
-double produit_tableau1d(double *tableau, int taille,double facteur);
+void produit_tableau1d(double *tableau, int taille,double facteur);
 
 /*
 NOM DE LA FONCTION : produit_scalaire1d

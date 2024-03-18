@@ -257,7 +257,6 @@ void tester_image_gris(void) {
     afficher_tableau2d(passe_bas, 3, 3);
     //Filtrez l'image.
     filtrer(image, nb_lignes, nb_colonnes, passe_bas);
-    printf("Image filtree\n");
     //Enregistrez sous
     //resultat_passe_bas1.bmp
     ecrire("../output/resultat_passe_bas1.bmp", image, nb_lignes, nb_colonnes);

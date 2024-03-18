@@ -32,50 +32,49 @@
 ****************************************************************************************/
 
 void afficher_tableau1d(double *tableau, int taille){
+    // On parcourt le tableau
     for (int i = 0; i < taille; i++) {
+        // On affiche l'élément courant
         printf("%0.3lf ",tableau[i]);
     }
 }
 
 
 double somme_tableau1d(double *tableau, int taille){
-    double somme = 0;
+    double somme = 0;  // On initialise la somme à 0
+    // On parcourt le tableau
     for (int i = 0; i < taille; i++) {
+        // On ajoute l'élément courant à la somme
         somme += tableau[i];
     }
     return somme;
 }
 
 
-double produit_tableau1d(double *tableau, int taille,double valeur){
-        for (int i = 0; i < taille; i++) {
+void produit_tableau1d(double *tableau, int taille,double valeur){
+    // On parcourt le tableau
+    for (int i = 0; i < taille; i++) {
+        // On multiplie l'élément courant par la valeur
         tableau[i]= valeur*tableau[i];
-        //printf("%0.3lf ",tableau[i]);
     }
-    afficher_tableau1d(tableau,taille);
-    return 0;
 }
 
 double produit_scalaire1d(double *tableau1, double *tableau2, int taille){
-    double produit_scalaire = 0;
+    double produit_scalaire = 0;    // On initialise le produit scalaire à 0
+    // On parcourt les tableaux
     for (int i = 0; i < taille; i++) {
+        // On ajoute le produit des éléments courants au produit scalaire
         produit_scalaire += tableau1[i]*tableau2[i];
     }
     return produit_scalaire;
 }
 
-/*
-NOM DE LA FONCTION : creer_tableau1d
 
-DESCRIPTION: La fonction a pour but de creer un tableau d'une taille demandée dont tout les valeurs sont nuls
-
-PARAMÈTRES : - taille: taille du tableau
-
-VALEUR DE RETOUR : - tableau: Le tableau creer
-*/
 double* creer_tableau1d(int taille){
-    double* tableau = (double*)calloc(taille, sizeof(double));
+    double* tableau = (double*)calloc(taille, sizeof(double)); // On alloue la mémoire pour le tableau
+    // On parcourt le tableau
     for (int i = 0; i < taille; i++) {
+        // On initialise l'élément courant à 0
         tableau[i]= 0;
     }
     return tableau;
@@ -83,8 +82,9 @@ double* creer_tableau1d(int taille){
 
 
 void detruire_tableau1d(double **tableau){
+    // On libère la mémoire allouée pour le tableau
     free(*tableau);
-    // Mettre l'adresse du tableau à 0
+    // On met le pointeur à NULL
     *tableau = 0;
 }
 /****************************************************************************************

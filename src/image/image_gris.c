@@ -14,6 +14,7 @@
 #include "image_gris.h"
 #include "noyau_filtre.h"
 #include "../tableau/tableau2d.h"
+#include "../tableau/tableau1d.h"
 
 /****************************************************************************************
 *                               DÉFINTION DES CONSTANTES                                *
@@ -25,46 +26,31 @@
 *                           DÉCLARATION DES FONCTIONS PRIVÉES                           *
 ****************************************************************************************/
 
-void filtrer_pixel(t_image_gris image, int nb_lignes, int nb_colonnes, t_filtre filtre, int i, int j, t_image_gris nouvelle_image);
+double filtrer_pixel(t_image_gris sous_image, t_filtre filtre);
 
 /****************************************************************************************
 *                           DÉFINTION DES FONCTIONS PUBLIQUES                            *
 ****************************************************************************************/
 
-//Sous-programme : negatif
-//Entrée : Une image en teinte de gris.
-//Le nombre de ligne de cette image.
-//Le nombre de colonne de cette image.
-//Sortie : Aucune
-//Requis 5 : La fonction remplace tous les pixels de l’image reçue par le négatif de ces pixels. On
-//calcule le négatif d’un pixel avec la formule : 1? ??????_?????.
 void negatif(t_image_gris image, int nb_lignes, int nb_colonnes){
+    // On parcourt l'image
     for(int i = 0; i < nb_lignes; i++)
     {
         for(int j = 0; j < nb_colonnes; j++)
         {
+            // On remplace chaque pixel par son négatif
             image[i][j] = 1 - image[i][j];
         }
     }
 }
 
-
-//Sous-programme : seuiller
-//Entrée : Une image en teinte de gris.
-//Le nombre de ligne de cette image.
-//Le nombre de colonne de cette image.
-//Un réel représentant un seuil
-//Sortie : Aucune
-//Requis 6 : La fonction remplace tous les pixels de l’image reçue par 0 ou par 1.
-//Requis 7 : Lorsque la valeur originale du pixel est inférieure au seuil, il est remplacé par un pixel
-//noir.
-//Requis 8 : Lorsque la valeur originale du pixel est supérieure ou égale au seuil, il est remplacé
-//par un pixel blanc.
 void seuiller(t_image_gris image, int nb_lignes, int nb_colonnes, double seuil){
+    // On parcourt l'image
     for(int i = 0; i < nb_lignes; i++)
     {
         for(int j = 0; j < nb_colonnes; j++)
         {
+            // On remplace chaque pixel par 0 ou 1 en fonction de l'ordre du seuil et de la valeur du pixel
             if(image[i][j] < seuil)
             {
                 image[i][j] = 0;
@@ -77,27 +63,21 @@ void seuiller(t_image_gris image, int nb_lignes, int nb_colonnes, double seuil){
     }
 }
 
-//Sous-programme : histogramme
-//Entrée : Une image en teinte de gris.
-//Le nombre de ligne de cette image.
-//Le nombre de colonne de cette image.
-//Un entier représentant un nombre de catégories
-//Sortie : Un tableau 1D contenant la distribution des pixels en fonction du nombre de catégorie
-//de couleur reçue.
-//Requis 10 : Créez un tableau dynamique en 1d possédant le bon nombre de case. Ce nombre de
-//case est équivalent au nombre de catégorie.
-//Requis 11 : On détermine la catégorie de chaque pixel et on en fait le décompte.
 double* histogramme(t_image_gris image, int nb_lignes, int nb_colonnes, int nb_categories){
-    double *histogramme = (double*)malloc(nb_categories * sizeof(double));
+    int categorie; //On crée une variable pour stocker la catégorie du pixel
+    double *histogramme = creer_tableau1d(nb_categories); //On crée un tableau 1D de taille nb_categories
+    // On initialise l'histogramme à 0
     for(int i = 0; i < nb_categories; i++)
     {
         histogramme[i] = 0;
     }
+    // On parcourt l'image
     for(int i = 0; i < nb_lignes; i++)
     {
         for(int j = 0; j < nb_colonnes; j++)
         {
-            int categorie = (int)(image[i][j] * nb_categories);
+            // On incrémente l'histogramme en fonction de la valeur du pixel
+            categorie = (int)(image[i][j] * nb_categories);
             histogramme[categorie]++;
         }
     }
@@ -122,6 +102,19 @@ double* histogramme(t_image_gris image, int nb_lignes, int nb_colonnes, int nb_c
 //est simplement l'accumulation des produits entre le filtre et l'image. Le résultat de cette
 //accumulation remplace le pixel dans l'image traitée.
 void filtrer(t_image_gris *image, int nb_lignes, int nb_colonnes, t_filtre filtre){
+    t_image_gris nouvelle_image = creer_tableau2d(nb_lignes, nb_colonnes);
+    for(int i = 0; i < nb_lignes; i++)
+    {
+        for(int j = 0; j < nb_colonnes; j++)
+        {
+            t_image_gris sous_image;
+            sous_tableau(*image, nb_lignes, nb_colonnes, i, j, TAILLE_FILTRE, TAILLE_FILTRE, &sous_image);
+            nouvelle_image[i][j] = filtrer_pixel(sous_image, filtre);
+            detruire_tableau2d(&sous_image, TAILLE_FILTRE);
+        }
+    }
+    detruire_tableau2d(image, nb_lignes);
+    *image = nouvelle_image;
 }
 
 /****************************************************************************************
@@ -133,21 +126,10 @@ void filtrer(t_image_gris *image, int nb_lignes, int nb_colonnes, t_filtre filtr
 //Requis 16 : Lorsque l'on applique un filtre à un pixel, on vient centrer le filtre sur le pixel ciblé. Ce
 //qui veut dire qu'une portion du filtre est sur les voisins du pixel ciblé. La convolution
 //est simplement l'accumulation des produits entre le filtre et l'image. Le résultat de cette
-//accumulation remplace le pixel dans l'image traitée.
-void filtrer_pixel(t_image_gris image, int nb_lignes, int nb_colonnes, t_filtre filtre, int i, int j, t_image_gris nouvelle_image){
-    int decalage = 1;
-    double somme = 0;
-    for(int k = 0; k < TAILLE_FILTRE; k++)
-    {
-        for(int l = 0; l < TAILLE_FILTRE; l++)
-        {
-            int ligne = i - decalage + k;
-            int colonne = j - decalage + l;
-            if(ligne >= 0 && ligne < nb_lignes && colonne >= 0 && colonne < nb_colonnes)
-            {
-                somme += image[ligne][colonne] * filtre[k][l];
-            }
-        }
-    }
-    nouvelle_image[i][j] = somme;
+//accumulation remplace le pixel dans l'image traitée. Utilisez les fonctions sous-tableau, somme_tableau2d et produit-tableau2d pour simplifier votre code.
+double filtrer_pixel(t_image_gris sous_image, t_filtre filtre){
+    double **produit = creer_tableau2d(TAILLE_FILTRE, TAILLE_FILTRE);
+    produit_tableau2d(sous_image, filtre, TAILLE_FILTRE, TAILLE_FILTRE, &produit);
+    double somme = somme_tableau2d(produit, TAILLE_FILTRE, TAILLE_FILTRE);
+    return somme;
 }
